@@ -114,18 +114,6 @@
                 href="https://gitech.leoay.com/cn/tags/index/"
                 />
   </url><url>
-    <loc>https://gitech.leoay.com/cn/posts/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="cn"
-                href="https://gitech.leoay.com/cn/posts/"
-                />
-  </url><url>
     <loc>https://gitech.leoay.com/cn/series/</loc>
     <xhtml:link
                 rel="alternate"
@@ -158,6 +146,18 @@
                 rel="alternate"
                 hreflang="cn"
                 href="https://gitech.leoay.com/cn/tags/"
+                />
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/posts/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gitech.leoay.com/en/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/posts/"
                 />
   </url>
 </urlset>
