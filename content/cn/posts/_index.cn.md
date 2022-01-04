@@ -1,7 +1,7 @@
 +++
 aliases = ["posts","articles","blog","showcase","docs"]
-title = "一文搞懂Go语言中的interface(1)"
+title = "文章列表"
 author = "leoay"
 tags = ["index"]
-description = "Post page"
+description = "文章列表"
 +++

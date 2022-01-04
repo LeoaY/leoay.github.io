@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>一文搞懂Go语言中的interface(1) on leoay tech blog</title>
+    <title>文章列表 on leoay tech blog</title>
     <link>https://gitech.leoay.com/cn/posts/</link>
-    <description>Recent content in 一文搞懂Go语言中的interface(1) on leoay tech blog</description>
+    <description>Recent content in 文章列表 on leoay tech blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn</language>
     <managingEditor>leoay@leoay.com (leoay)</managingEditor>
