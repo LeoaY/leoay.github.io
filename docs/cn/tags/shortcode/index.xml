@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>leoay tech blog</title>
-    <link>https://gitech.leoay.com/cn/</link>
-    <description>Recent content on leoay tech blog</description>
+    <title>shortcode on leoay tech blog</title>
+    <link>https://gitech.leoay.com/cn/tags/shortcode/</link>
+    <description>Recent content in shortcode on leoay tech blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn</language>
     <managingEditor>leoay@leoay.com (leoay)</managingEditor>
@@ -16,29 +16,8 @@
     <copyright>©2022, All Rights Reserved</copyright>
     <lastBuildDate>Sat, 25 Jan 2020 06:40:51 +0900</lastBuildDate>
     
-        <atom:link href="https://gitech.leoay.com/cn/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://gitech.leoay.com/cn/tags/shortcode/index.xml" rel="self" type="application/rss+xml" />
     
-      
-      
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
 
       
       <item>

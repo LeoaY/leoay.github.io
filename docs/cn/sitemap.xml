@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://gitech.leoay.com/cn/</loc>
-    <lastmod>2019-10-19T11:44:14+09:00</lastmod>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,6 +18,53 @@
                 rel="alternate"
                 hreflang="cn"
                 href="https://gitech.leoay.com/cn/"
+                />
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/tags/shortcode/</loc>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gitech.leoay.com/en/tags/shortcode/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/tags/shortcode/"
+                />
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/tags/</loc>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gitech.leoay.com/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ko"
+                href="https://gitech.leoay.com/ko/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/tags/"
+                />
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/posts/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84interface1/</loc>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/posts/</loc>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gitech.leoay.com/en/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/posts/"
                 />
   </url><url>
     <loc>https://gitech.leoay.com/cn/archive/</loc>
@@ -129,35 +176,6 @@
                 rel="alternate"
                 hreflang="cn"
                 href="https://gitech.leoay.com/cn/series/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/cn/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="cn"
-                href="https://gitech.leoay.com/cn/tags/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/cn/posts/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="cn"
-                href="https://gitech.leoay.com/cn/posts/"
                 />
   </url>
 </urlset>
