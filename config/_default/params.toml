@@ -130,7 +130,7 @@ commento = true
 
 [gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
   owner = "leoay"              # Your GitHub ID
-  repo = "https://github.com/leoay/gitech_comment.git"               # The repo to store comments
+  repo = "gitech_comment"               # The repo to store comments
   clientId = "4afa5ebcecae32ced2c8"           # Your client ID
   clientSecret = "03acbf1b1be7f1ab5029af589aade56d91652308"       # Your client secret
 
