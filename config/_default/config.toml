@@ -1,8 +1,8 @@
 baseURL = "https://gitech.leoay.com"
-title = "Hugo Zzo Theme"
+title = "leoay tech blog"
 theme = "zzo"
 
-defaultContentLanguage = "en"
+defaultContentLanguage = "cn"
 defaultContentLanguageInSubdir = true
 hasCJKLanguage = true
 

@@ -9,9 +9,14 @@
   </sitemap>
   
   <sitemap>
-    <loc>https://gitech.leoay.com/ko/sitemap.xml</loc>
+    <loc>https://gitech.leoay.com/cn/sitemap.xml</loc>
     
       <lastmod>2019-10-19T11:44:14+09:00</lastmod>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>https://gitech.leoay.com/ko/sitemap.xml</loc>
     
   </sitemap>
   

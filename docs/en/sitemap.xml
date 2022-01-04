@@ -12,6 +12,11 @@
     <lastmod>2020-03-05T14:08:48+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="ko"
                 href="https://gitech.leoay.com/ko/"
                 />
@@ -37,8 +42,8 @@
     <lastmod>2020-01-25T06:40:51+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/posts/"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/posts/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -54,6 +59,11 @@
   </url><url>
     <loc>https://gitech.leoay.com/en/tags/</loc>
     <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/tags/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
@@ -73,6 +83,11 @@
   </url><url>
     <loc>https://gitech.leoay.com/en/categories/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/categories/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
@@ -98,6 +113,11 @@
   </url><url>
     <loc>https://gitech.leoay.com/en/series/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/series/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
@@ -197,8 +217,8 @@
     <lastmod>2019-10-31T10:20:16+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/gallery/cartoon/"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/gallery/cartoon/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -210,8 +230,8 @@
     <lastmod>2019-10-31T10:20:16+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/gallery/"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/gallery/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -223,8 +243,8 @@
     <lastmod>2019-10-31T10:20:16+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/gallery/photo/"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/gallery/photo/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -251,8 +271,8 @@
     <lastmod>2019-10-19T11:44:14+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/archive/"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/archive/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -264,8 +284,8 @@
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/about/"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/about/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -285,8 +305,8 @@
     <loc>https://gitech.leoay.com/en/tags/index/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/tags/index/"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/tags/index/"
                 />
     <xhtml:link
                 rel="alternate"

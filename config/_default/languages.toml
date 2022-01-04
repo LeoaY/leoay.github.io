@@ -11,3 +11,11 @@
   weight = 2
   languagedir = "ltr"
   contentdir = "content/ko"
+
+
+[cn]
+  title = "leoay tech blog"
+  languageName = "中文"
+  weight = 2
+  languagedir = "ltr"
+  contentdir = "content/cn"

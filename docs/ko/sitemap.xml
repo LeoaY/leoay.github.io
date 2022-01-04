@@ -2,84 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://gitech.leoay.com/ko/</loc>
-    <lastmod>2019-10-19T11:44:14+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/ko/archive/</loc>
-    <lastmod>2019-10-19T11:44:14+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/archive/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/archive/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/ko/about/</loc>
-    <lastmod>2019-10-09T11:44:14+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/about/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/ko/gallery/</loc>
-    <lastmod>2018-10-12T10:20:16+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/gallery/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/gallery/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/ko/gallery/photo/</loc>
-    <lastmod>2018-10-12T10:20:16+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/gallery/photo/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/gallery/photo/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/ko/gallery/cartoon/</loc>
-    <lastmod>2018-10-11T10:20:16+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/gallery/cartoon/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/gallery/cartoon/"
-                />
-  </url><url>
     <loc>https://gitech.leoay.com/ko/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -88,32 +10,30 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="ko"
                 href="https://gitech.leoay.com/ko/categories/"
                 />
   </url><url>
-    <loc>https://gitech.leoay.com/ko/tags/index/</loc>
+    <loc>https://gitech.leoay.com/ko/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://gitech.leoay.com/en/tags/index/"
+                href="https://gitech.leoay.com/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="https://gitech.leoay.com/ko/tags/index/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/ko/posts/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/posts/"
+                href="https://gitech.leoay.com/ko/"
                 />
   </url><url>
     <loc>https://gitech.leoay.com/ko/series/</loc>
@@ -121,6 +41,11 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://gitech.leoay.com/en/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/series/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -133,6 +58,11 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://gitech.leoay.com/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/tags/"
                 />
     <xhtml:link
                 rel="alternate"
