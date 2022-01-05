@@ -1657,6 +1657,10 @@
       <ul>
         <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
         <li><a href="#接口的使用实践">接口的使用实践</a></li>
+        <li><a href="#接口内部表示">接口内部表示</a></li>
+        <li><a href="#空接口">空接口</a></li>
+        <li><a href="#接口的类型断言">接口的类型断言</a></li>
+        <li><a href="#类型开关">类型开关</a></li>
       </ul>
     </li>
   </ul>
@@ -2064,7 +2068,7 @@
 <p>新的 totalExpense 方法中不需要更改其他代码， 因为 Freelancer 结构体也实现了该 SalaryCalculator 接口。</p>
 <p>然后我们在main方法中添加了几个 Freelancer 类型的员工。执行程序后打印，</p>
 <p>每月的总支出 ￥32450</p>
-<h1 id="接口内部表示">接口内部表示</h1>
+<h3 id="接口内部表示">接口内部表示</h3>
 <p>可以认为接口在内部由 tuple(type, value) 中表示的。type 是接口的底层具体类型， value 保存具体类型的值。</p>
 <p>为了更好地理解，我们写一段代码展示：</p>
 <div class="highlight"><div class="chroma">
@@ -2145,7 +2149,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来我们更深入地了解一些怎么获取接口底层的值。</p>
-<h1 id="空接口">空接口</h1>
+<h3 id="空接口">空接口</h3>
 <p>一个没有方法的接口就是空接口， 用 interface{} 表示， 因为空接口中没有方法，所以所有的类型都实现了一个空接口。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2212,7 +2216,7 @@ In the program above, in line no.7, the describe(i interface{}) function takes a
 <span class="nv">Type</span> <span class="o">=</span> struct <span class="o">{</span> name string <span class="o">}</span>, <span class="nv">value</span> <span class="o">=</span> <span class="o">{</span>Naveen R<span class="o">}</span>  
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="接口的类型断言">接口的类型断言</h1>
+</div><h3 id="接口的类型断言">接口的类型断言</h3>
 <p>类型断言用于获取接口的底层值。</p>
 <p>i.(T) 用于获取 i 具体类型为 T 的接口的底层值。</p>
 <p>代码胜万言，下面我就用代码展示类型断言是怎么用的</p>
@@ -2346,7 +2350,7 @@ In the program above, in line no.7, the describe(i interface{}) function takes a
 <span class="m">0</span> <span class="nb">false</span>  
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="类型开关">类型开关</h1>
+</div><h3 id="类型开关">类型开关</h3>
 <p>类型开关用于将接口的实际类型与多种情况下 case 语句中指定的类型进行比较。</p>
 <p>类似于 switch case。唯一的区别是 case 指定的是类型而不是正常 switch 中的值。</p>
 <p>类型开关的语法类似于类型断言。</p>
@@ -3220,6 +3224,10 @@ document.addEventListener('DOMContentLoaded', function () {
       <ul>
         <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
         <li><a href="#接口的使用实践">接口的使用实践</a></li>
+        <li><a href="#接口内部表示">接口内部表示</a></li>
+        <li><a href="#空接口">空接口</a></li>
+        <li><a href="#接口的类型断言">接口的类型断言</a></li>
+        <li><a href="#类型开关">类型开关</a></li>
       </ul>
     </li>
   </ul>
