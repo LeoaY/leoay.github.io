@@ -1,5 +1,5 @@
 baseURL = "https://gitech.leoay.com"
-title = "leoay tech blog"
+title = "leoay 技术日志"
 theme = "zzo"
 
 defaultContentLanguage = "cn"

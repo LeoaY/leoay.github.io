@@ -1,5 +1,5 @@
 [en]
-  title = "Hugo Zzo Theme"
+  title = "leoay tech blog"
   languageName = "English"
   weight = 1
   languagedir = "ltr"
@@ -14,7 +14,7 @@
 
 
 [cn]
-  title = "leoay tech blog"
+  title = "leoay 技术日志"
   languageName = "中文"
   weight = 2
   languagedir = "ltr"

@@ -6,7 +6,7 @@
 
 [[main]]
   identifier = "archive"
-  name = "归档"
+  name = "历史文章"
   url = "archive"
   weight = 2
 
@@ -15,11 +15,6 @@
   name = "画廊"
   url = "gallery"
   weight = 3
-    
-[[main]]
-  parent = "gallery"
-  name = "fiverr"
-  url = "gallery/mine"
 
 [[main]]
   identifier = "posts"
