@@ -20,7 +20,7 @@ enablePinnedPosts = true
 minItemsToShowInTagCloud = 1 # Minimum items to show in tag cloud
 
 # appbar
-enableAppbarSearchIcon = true
+enableAppbarSearchIcon = false
 enableAppbarLangIcon = false
 
 # header
@@ -31,7 +31,7 @@ hideHomeHeaderWhenMobile = false
 showMobileMenuTerms = ["tags", "categories", "series"]
 
 # search
-enableSearch = true
+enableSearch = false
 enableSearchHighlight = true
 searchResultPosition = "main" # side, main
 searchContent = true # include content to search index
@@ -42,7 +42,7 @@ searchThreshold = 0.4 # 0.0: exact match, 1.0: any match
 enableBreadcrumb = true
 enableGoToTop = true
 enableWhoami = true
-summaryShape = "classic" # card, classic, compact
+summaryShape = "card" # card, classic, compact
 archiveGroupByDate = "2006" # "2006-01": group by month, "2006": group by year
 archivePaginate = 13
 paginateWindow = 1
