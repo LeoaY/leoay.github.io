@@ -93,7 +93,7 @@ showPoweredBy = false
 showFeedLinks = true
 showSocialLinks = true
 enableLangChange = false
-enableThemeChange = true
+enableThemeChange = false
 
 # service
 googleTagManager = "" # GTM-XXXXXX
