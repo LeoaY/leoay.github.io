@@ -65,7 +65,7 @@ typeIcon = "🎯"
 myname = "leoay"
 email = "leoay@leoay.com"
 whoami = "Go/Web Developers"
-bioImageUrl = ""
+bioImageUrl = "https://assets.leetcode-cn.com/aliyun-lc-upload/users/leoay/avatar_1617155445.png?x-oss-process=image%2Fresize%2Ch_160%2Cw_160%2Fformat%2Cwebp"
 useGravatar = false
 location = "杭州, 中国"
 organization = "leoay"
