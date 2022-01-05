@@ -30,7 +30,7 @@
         <description>我是 leoay, 一个单纯的技术人， 你好，我是 leoay，又好久不见了，好像上篇文章立的 flag 又被打破了， 如果不知道，那就前往上篇文章看看我立的 flag。 果</description>
         
         <dc:creator>leoay</dc:creator>
-        <media:content url="https://gitech.leoay.comhttps://cdn.jsdelivr.net/gh/dreamhomes/blog-image-bed@master/top/dreamhomes/butterflyblog/imgs/202111181610387.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
         
         
         
@@ -42,6 +42,12 @@
         
         
           
+            
+              <category>golang</category>
+            
+          
+            
+              <category>interface</category>
             
           
         

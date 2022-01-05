@@ -33,6 +33,30 @@
                 href="https://gitech.leoay.com/cn/"
                 />
   </url><url>
+    <loc>https://gitech.leoay.com/cn/categories/</loc>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gitech.leoay.com/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ko"
+                href="https://gitech.leoay.com/ko/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/categories/"
+                />
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/categories/golang/</loc>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/categories/interface/</loc>
+    <lastmod>2020-01-25T06:40:51+09:00</lastmod>
+  </url><url>
     <loc>https://gitech.leoay.com/cn/tags/shortcode/</loc>
     <lastmod>2020-01-25T06:40:51+09:00</lastmod>
     <xhtml:link
@@ -130,23 +154,6 @@
                 rel="alternate"
                 hreflang="cn"
                 href="https://gitech.leoay.com/cn/gallery/cartoon/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/cn/categories/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ko"
-                href="https://gitech.leoay.com/ko/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="cn"
-                href="https://gitech.leoay.com/cn/categories/"
                 />
   </url><url>
     <loc>https://gitech.leoay.com/cn/tags/index/</loc>
