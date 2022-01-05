@@ -1,8 +1,18 @@
 ---
-title: "摄影"
-date: 2018-10-12T10:20:16+09:00
-description: 摄影 画廊
-type: "gallery"
-mode: "one-by-one"
+title: Photo
+date: 2019-10-31T10:20:16+09:00
+description: Photo Gallery
+type: gallery
+mode: one-by-one
+description: "photo gallery"
 images:
+  - image: beach.jpg
+    caption: beach, women, car
+  - image: beautiful.jpg
+    caption: beautiful women
+  - image: people.jpg
+    caption: man
+  - image: child.jpg
+    caption: child
+image: images/feature2/gallery.png
 ---

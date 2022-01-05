@@ -67,6 +67,32 @@
                 href="https://gitech.leoay.com/cn/posts/"
                 />
   </url><url>
+    <loc>https://gitech.leoay.com/cn/gallery/</loc>
+    <lastmod>2019-10-31T10:20:16+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gitech.leoay.com/en/gallery/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/gallery/"
+                />
+  </url><url>
+    <loc>https://gitech.leoay.com/cn/gallery/photo/</loc>
+    <lastmod>2019-10-31T10:20:16+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://gitech.leoay.com/en/gallery/photo/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="cn"
+                href="https://gitech.leoay.com/cn/gallery/photo/"
+                />
+  </url><url>
     <loc>https://gitech.leoay.com/cn/archive/</loc>
     <lastmod>2019-10-19T11:44:14+09:00</lastmod>
     <xhtml:link
@@ -91,32 +117,6 @@
                 rel="alternate"
                 hreflang="cn"
                 href="https://gitech.leoay.com/cn/about/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/cn/gallery/</loc>
-    <lastmod>2018-10-12T10:20:16+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/gallery/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="cn"
-                href="https://gitech.leoay.com/cn/gallery/"
-                />
-  </url><url>
-    <loc>https://gitech.leoay.com/cn/gallery/photo/</loc>
-    <lastmod>2018-10-12T10:20:16+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://gitech.leoay.com/en/gallery/photo/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="cn"
-                href="https://gitech.leoay.com/cn/gallery/photo/"
                 />
   </url><url>
     <loc>https://gitech.leoay.com/cn/gallery/cartoon/</loc>
