@@ -6,5 +6,4 @@ tags = ["index"]
 description = "文章列表"
 +++
 
-
-[[!](/images/whoami/Untitled-1.svg)](#)
+[![沙漠中的岩石图片](/images/whoami/Untitled-1.svg "Shiprock")](https://markdown.com.cn)
