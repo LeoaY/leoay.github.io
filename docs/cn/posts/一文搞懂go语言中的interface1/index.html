@@ -1653,7 +1653,12 @@
   <div class="expand__content expand__content--toc">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
+    <li>
+      <ul>
+        <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
+        <li><a href="#接口的使用实践">接口的使用实践</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -1669,7 +1674,7 @@
 <p>接口指定了一个类型中拥有的方法，也决定了这个类型怎么去实现这些方法。</p>
 <p>举个例子，洗衣机可以被认为是一个有洗涤和干燥方法的接口，那么我们就可以把任何提供洗涤和干燥方法的类型，就叫做实现了洗衣机接口。</p>
 <p>下面我们用代码进行更加详细地说明：</p>
-<h2 id="声明和实现一个接口">声明和实现一个接口</h2>
+<h3 id="声明和实现一个接口">声明和实现一个接口</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1753,7 +1758,7 @@
 <p>所以在下面的代码中，我们可以直接用 v 调用 Cleaning() 和 Drying() 这两个方法，因为 WashingMachine 已经实现了 WashingMachine 中的方法。</p>
 <p>到了一步，我们就创建了一个接口，怎么样，是不是超级简单。</p>
 <p>其实，如果你更深入学习 Go 语言时，你会发现接口在Go项目开发中使用的特别频繁，一不留神它就出现在你眼前，不过如果不了解的话，就会感到一头雾水。</p>
-<h1 id="接口的使用实践">接口的使用实践</h1>
+<h3 id="接口的使用实践">接口的使用实践</h3>
 <p>通过上面的例子，我们知道了怎么创建并实现一个接口，但是并没有真正说明白怎么在实际项目中使用。</p>
 <p>从上面代码中我们可以发现这一行代码 <code>name := MyWashingMachine(&quot;Leoay Home&quot;)</code></p>
 <p>那么，这个有什么用呢？</p>
@@ -3211,7 +3216,12 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="toc " data-dir="ltr" data-folding="true" data-ani="true">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
+    <li>
+      <ul>
+        <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
+        <li><a href="#接口的使用实践">接口的使用实践</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
