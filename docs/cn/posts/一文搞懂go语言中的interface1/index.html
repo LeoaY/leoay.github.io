@@ -1347,8 +1347,8 @@
 <meta property="og:description" content="go, interface, go语言, golang, 接口">
 
   
-    <meta property="og:image" content="https://gitech.leoay.com/images/feature3/code-file.png">
-    <meta property="og:image:url" content="https://gitech.leoay.com/images/feature3/code-file.png">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/dreamhomes/blog-image-bed@master/top/dreamhomes/butterflyblog/imgs/202111181610387.png">
+    <meta property="og:image:url" content="https://cdn.jsdelivr.net/gh/dreamhomes/blog-image-bed@master/top/dreamhomes/butterflyblog/imgs/202111181610387.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="leoay技术日志">
     <meta property="twitter:title" content="一文搞懂Go语言中的interface(1)">
@@ -1396,7 +1396,7 @@
     "url" : "https://gitech.leoay.com/cn/posts/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84interface1/",
     "description": "go, interface, go语言, golang, 接口",
     "keywords": ["shortcode"],
-    "image" : "https://gitech.leoay.com/images/feature3/code-file.png",
+    "image" : "https://cdn.jsdelivr.net/gh/dreamhomes/blog-image-bed@master/top/dreamhomes/butterflyblog/imgs/202111181610387.png",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://gitech.leoay.com"
@@ -1623,7 +1623,7 @@
 <div class="single__infos">
   <time class="single__info" title="">📅&nbsp; </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title=""> ☕&nbsp;1&nbsp; </span>
+  &nbsp;&middot;&nbsp; <span class="single__info" title=""> ☕&nbsp;8&nbsp; </span>
   
   <span class="single__info">
     
@@ -1653,14 +1653,849 @@
   <div class="expand__content expand__content--toc">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#一文读懂">一文读懂</a></li>
+    <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
   </ul>
 </nav>
   </div>
 </div>
 
-      <h2 id="一文读懂">一文读懂</h2>
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FsVhI4sSLbBLQcxwVd8VIZF%2FUntitled%3Fnode-id%3D0%253A1" allowfullscreen></iframe>
+      <p>我是 leoay, 一个单纯的技术人，</p>
+<p>你好，我是 leoay，又好久不见了，好像上篇文章立的 flag 又被打破了， 如果不知道，那就前往上篇文章看看我立的 flag。</p>
+<p>果然， 同时更新维护两个公众号是一件不太容易的事情，熟悉我的朋友应该知道，我基本上都一值在 leoay 这个号更新，而且是日更，所以技术号有时候就会被忽略掉了，</p>
+<p>毕竟每天要和大部分人一样要工作。</p>
+<p>那么问题来了，什么是一个接口呢？</p>
+<p>在Go语言中，接口是一个方法的集合，当一个类型中定义了这个接口中的所有方法时，我们也将这叫做实现了这个接口。</p>
+<p>这个很像面向对象编程范式中提到的接口。</p>
+<p>接口指定了一个类型中拥有的方法，也决定了这个类型怎么去实现这些方法。</p>
+<p>举个例子，洗衣机可以被认为是一个有洗涤和干燥方法的接口，那么我们就可以把任何提供洗涤和干燥方法的类型，就叫做实现了洗衣机接口。</p>
+<p>下面我们用代码进行更加详细地说明：</p>
+<h2 id="声明和实现一个接口">声明和实现一个接口</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">//interface definition
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">WashingMachine</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="nf">Cleaning</span><span class="p">()</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+	<span class="nf">Drying</span><span class="p">()</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">MyWashingMachine</span> <span class="kt">string</span>
+
+<span class="c1">//MyWashingMachine 实现了 WashingMachine
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">mwm</span> <span class="nx">MyWashingMachine</span><span class="p">)</span> <span class="nf">Cleaning</span><span class="p">()</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">//do clean work
+</span><span class="c1"></span>	<span class="k">return</span> <span class="s">&#34;Clean Ok!&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">mwm</span> <span class="nx">MyWashingMachine</span><span class="p">)</span> <span class="nf">Drying</span><span class="p">()</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">//do dry work
+</span><span class="c1"></span>	<span class="k">return</span> <span class="s">&#34;Drying Ok!&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">v</span> <span class="nx">WashingMachine</span>
+	<span class="nx">name</span> <span class="o">:=</span> <span class="nf">MyWashingMachine</span><span class="p">(</span><span class="s">&#34;Leoay Home&#34;</span><span class="p">)</span>
+	<span class="nx">v</span> <span class="p">=</span> <span class="nx">name</span>
+	<span class="nx">resut</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Cleaning</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;result: &#34;</span><span class="p">,</span> <span class="nx">resut</span><span class="p">,</span> <span class="s">&#34;err is: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+
+	<span class="nx">resut</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Drying</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;result: &#34;</span><span class="p">,</span> <span class="nx">resut</span><span class="p">,</span> <span class="s">&#34;err is: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在上面的代码中我们创建了一个 WashingMachine 接口类型，其中有两个方法，分别是 Cleaning ()和Drying()</p>
+<p>然后，我们定义了一个 MyWashingMachine 类型，接着我们写了两个方法分别是 Cleaning() 和 Drying(), 并将 MyWashingMachine 作为方法的接收类型</p>
+<p>这个时候，我们就可以说 MyWashingMachine 实现了 WashingMachine 接口。这个与 java 有很大不同，在java中我们一般使用 implements 这个关键字表示实现了一个接口。</p>
+<p>而在Go语言中，只需要这个类型包含接口中的所有方法即可。</p>
+<p>所以在下面的代码中，我们可以直接用 v 调用 Cleaning() 和 Drying() 这两个方法，因为 WashingMachine 已经实现了 WashingMachine 中的方法。</p>
+<p>到了一步，我们就创建了一个接口，怎么样，是不是超级简单。</p>
+<p>其实，如果你更深入学习 Go 语言时，你会发现接口在Go项目开发中使用的特别频繁，一不留神它就出现在你眼前，不过如果不了解的话，就会感到一头雾水。</p>
+<h1 id="接口的使用实践">接口的使用实践</h1>
+<p>通过上面的例子，我们知道了怎么创建并实现一个接口，但是并没有真正说明白怎么在实际项目中使用。</p>
+<p>从上面代码中我们可以发现这一行代码 <code>name := MyWashingMachine(&quot;Leoay Home&quot;)</code></p>
+<p>那么，这个有什么用呢？</p>
+<p>如果我们直接使用 name 调用 Cleaning() 和 Drying() 函数时，会出现什么问题呢？</p>
+<p>这个时候虽然也能正常输出，但是没有用到接口。</p>
+<p>下面，我就用一个实例说明一下接口的使用。</p>
+<p>我们将编写一个简单的程序，根据员工的个人工资计算公司的总费用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">SalaryCalculator</span> <span class="kd">interface</span> <span class="p">{</span>  
+    <span class="nf">CalculateSalary</span><span class="p">()</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Permanent</span> <span class="kd">struct</span> <span class="p">{</span>  
+    <span class="nx">empId</span>    <span class="kt">int</span>
+    <span class="nx">basicpay</span> <span class="kt">int</span>
+    <span class="nx">pf</span>       <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Contract</span> <span class="kd">struct</span> <span class="p">{</span>  
+    <span class="nx">empId</span>    <span class="kt">int</span>
+    <span class="nx">basicpay</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="c1">//正式员工的工资是基本工资和奖金的总和
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="nx">Permanent</span><span class="p">)</span> <span class="nf">CalculateSalary</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>  
+    <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">basicpay</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">pf</span>
+<span class="p">}</span>
+
+<span class="c1">//试用期员工的工资是单独的基本工资
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="nx">Contract</span><span class="p">)</span> <span class="nf">CalculateSalary</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>  
+    <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">basicpay</span>
+<span class="p">}</span>
+
+<span class="c1">//总费用是通过迭代 SalaryCalculator 切片并求和来计算的
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">totalExpense</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="nx">SalaryCalculator</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">expense</span> <span class="o">:=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">s</span> <span class="p">{</span>
+        <span class="nx">expense</span> <span class="p">=</span> <span class="nx">expense</span> <span class="o">+</span> <span class="nx">v</span><span class="p">.</span><span class="nf">CalculateSalary</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;每个月的总支出 ￥%d&#34;</span><span class="p">,</span> <span class="nx">expense</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nx">pemp1</span> <span class="o">:=</span> <span class="nx">Permanent</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>    <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">basicpay</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
+        <span class="nx">pf</span><span class="p">:</span>       <span class="mi">20</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">pemp2</span> <span class="o">:=</span> <span class="nx">Permanent</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>    <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">basicpay</span><span class="p">:</span> <span class="mi">6000</span><span class="p">,</span>
+        <span class="nx">pf</span><span class="p">:</span>       <span class="mi">30</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">cemp1</span> <span class="o">:=</span> <span class="nx">Contract</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>    <span class="mi">3</span><span class="p">,</span>
+        <span class="nx">basicpay</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">employees</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">SalaryCalculator</span><span class="p">{</span><span class="nx">pemp1</span><span class="p">,</span> <span class="nx">pemp2</span><span class="p">,</span> <span class="nx">cemp1</span><span class="p">}</span>
+    <span class="nf">totalExpense</span><span class="p">(</span><span class="nx">employees</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从上面的代码中我们可以看到 我们在 SalaryCalculator 接口中声明了一个 CalculateSalary() 方法</p>
+<p>在公司里有两种雇员，正式员工和试用期员工，分别用 Permanent 和 Contract 两个结构体表示，正式员工的工资包含基本工资和奖金，试用期员工的工资只有基本工资，但是我们希望只用一个方法计算员工的工资，所以我们就分别用 Permanent 和 Contract 实现了 SalaryCalculator 接口，这样无论员工是哪种类型，都有可以用 CalculateSalary 方法计算薪水了。</p>
+<p>然后我们定义了一个总的计算薪水支出的方法 totalExpense， 这个方法将 SalaryCalculator 切片作为参数，然后通过这个切片将所有的员工信息传到方法中去，然后在内部调用 CalculateSalary 方法计算每个员工的薪水并求和</p>
+<p>执行上面的代码我们可以最后的输出结果:</p>
+<p>每个月的总支出 ￥14050</p>
+<p>这样做的最大优点是 totalExpense 可以扩展到任何新员工类型而无需更改任何代码。</p>
+<p>假设公司增加了 Freelancer 一种工资结构不同的新型员工。</p>
+<p>Freelancer 可以只在 slice 参数中传递给 totalExpense 而无需对 totalExpense 函数进行任何一行代码更改</p>
+<p>这个方法会做它应该做的事情，Freelancer 也会实现 SalaryCalculator 接口</p>
+<p>下面我们就修改这个程序增加一种新的雇员 Freelancer， 其薪资是收入效率和总工作时间的乘积</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">SalaryCalculator</span> <span class="kd">interface</span> <span class="p">{</span>  
+    <span class="nf">CalculateSalary</span><span class="p">()</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Permanent</span> <span class="kd">struct</span> <span class="p">{</span>  
+    <span class="nx">empId</span>    <span class="kt">int</span>
+    <span class="nx">basicpay</span> <span class="kt">int</span>
+    <span class="nx">pf</span>       <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Contract</span> <span class="kd">struct</span> <span class="p">{</span>  
+    <span class="nx">empId</span>    <span class="kt">int</span>
+    <span class="nx">basicpay</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Freelancer</span> <span class="kd">struct</span> <span class="p">{</span>  
+    <span class="nx">empId</span>       <span class="kt">int</span>
+    <span class="nx">ratePerHour</span> <span class="kt">int</span>
+    <span class="nx">totalHours</span>  <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="c1">//正式员工的工资是基本工资和奖金的总和
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="nx">Permanent</span><span class="p">)</span> <span class="nf">CalculateSalary</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>  
+    <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">basicpay</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">pf</span>
+<span class="p">}</span>
+
+<span class="c1">//试用期员工的工资是单独的基本工资
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="nx">Contract</span><span class="p">)</span> <span class="nf">CalculateSalary</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>  
+    <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">basicpay</span>
+<span class="p">}</span>
+
+<span class="c1">//自由职业者的薪资
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">f</span> <span class="nx">Freelancer</span><span class="p">)</span> <span class="nf">CalculateSalary</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>  
+    <span class="k">return</span> <span class="nx">f</span><span class="p">.</span><span class="nx">ratePerHour</span> <span class="o">*</span> <span class="nx">f</span><span class="p">.</span><span class="nx">totalHours</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">totalExpense</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="nx">SalaryCalculator</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">expense</span> <span class="o">:=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">s</span> <span class="p">{</span>
+        <span class="nx">expense</span> <span class="p">=</span> <span class="nx">expense</span> <span class="o">+</span> <span class="nx">v</span><span class="p">.</span><span class="nf">CalculateSalary</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;每月的总支出 ￥%d&#34;</span><span class="p">,</span> <span class="nx">expense</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nx">pemp1</span> <span class="o">:=</span> <span class="nx">Permanent</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>    <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">basicpay</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
+        <span class="nx">pf</span><span class="p">:</span>       <span class="mi">20</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">pemp2</span> <span class="o">:=</span> <span class="nx">Permanent</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>    <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">basicpay</span><span class="p">:</span> <span class="mi">6000</span><span class="p">,</span>
+        <span class="nx">pf</span><span class="p">:</span>       <span class="mi">30</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">cemp1</span> <span class="o">:=</span> <span class="nx">Contract</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>    <span class="mi">3</span><span class="p">,</span>
+        <span class="nx">basicpay</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">freelancer1</span> <span class="o">:=</span> <span class="nx">Freelancer</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>       <span class="mi">4</span><span class="p">,</span>
+        <span class="nx">ratePerHour</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+        <span class="nx">totalHours</span><span class="p">:</span>  <span class="mi">120</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">freelancer2</span> <span class="o">:=</span> <span class="nx">Freelancer</span><span class="p">{</span>
+        <span class="nx">empId</span><span class="p">:</span>       <span class="mi">5</span><span class="p">,</span>
+        <span class="nx">ratePerHour</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">totalHours</span><span class="p">:</span>  <span class="mi">100</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nx">employees</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">SalaryCalculator</span><span class="p">{</span><span class="nx">pemp1</span><span class="p">,</span> <span class="nx">pemp2</span><span class="p">,</span> <span class="nx">cemp1</span><span class="p">,</span> <span class="nx">freelancer1</span><span class="p">,</span> <span class="nx">freelancer2</span><span class="p">}</span>
+    <span class="nf">totalExpense</span><span class="p">(</span><span class="nx">employees</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们添加了一个 Freelancer 结构体。并声明了一个用Freelancer实现的CalculateSalary方法。</p>
+<p>新的 totalExpense 方法中不需要更改其他代码， 因为 Freelancer 结构体也实现了该 SalaryCalculator 接口。</p>
+<p>然后我们在main方法中添加了几个 Freelancer 类型的员工。执行程序后打印，</p>
+<p>每月的总支出 ￥32450</p>
+<h1 id="接口内部表示">接口内部表示</h1>
+<p>可以认为接口在内部由 tuple(type, value) 中表示的。type 是接口的底层具体类型， value 保存具体类型的值。</p>
+<p>为了更好地理解，我们写一段代码展示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">Worker</span> <span class="kd">interface</span> <span class="p">{</span>  
+    <span class="nf">Work</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>  
+    <span class="nx">name</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="nx">Person</span><span class="p">)</span> <span class="nf">Work</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s">&#34;is working&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">describe</span><span class="p">(</span><span class="nx">w</span> <span class="nx">Worker</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Interface type %T value %v\n&#34;</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">w</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">Person</span><span class="p">{</span>
+        <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;Naveen&#34;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">w</span> <span class="nx">Worker</span> <span class="p">=</span> <span class="nx">p</span>
+    <span class="nf">describe</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
+    <span class="nx">w</span><span class="p">.</span><span class="nf">Work</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从上面的代码我们可以看到，Worker 接口有一个方法 Work(), 而 Person 结构体类型实现了该接口。</p>
+<p>在main函数中我们定义了一个 Person 类型的 p, 并将他赋值给 Worker 类型的变量 w, 那么现在 w 的类型就变成了 Person, 而且其包含一个变量 name 值为 Naveen。</p>
+<p>而 describe 函数则打印了 Worker 接口的具体类型和值，结果输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Interface <span class="nb">type</span> main.Person value <span class="o">{</span>Naveen<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>接下来我们更深入地了解一些怎么获取接口底层的值。</p>
+<h1 id="空接口">空接口</h1>
+<p>一个没有方法的接口就是空接口， 用 interface{} 表示， 因为空接口中没有方法，所以所有的类型都实现了一个空接口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">describe</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>  
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Type = %T, value = %v\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nx">s</span> <span class="o">:=</span> <span class="s">&#34;Hello World&#34;</span>
+    <span class="nf">describe</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+    <span class="nx">i</span> <span class="o">:=</span> <span class="mi">55</span>
+    <span class="nf">describe</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+    <span class="nx">strt</span> <span class="o">:=</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">name</span> <span class="kt">string</span>
+    <span class="p">}{</span>
+        <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;Naveen R&#34;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nf">describe</span><span class="p">(</span><span class="nx">strt</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的代码中，因为函数 describe(i interface{}) 以一个空接口作为参数，所以任何类型的参数都可以被传入，这一点很像 C++ 或 Java 中的泛型。<br />
+In the program above, in line no.7, the describe(i interface{}) function takes an empty interface as an argument and hence any type can be passed.</p>
+<p>因此，在上面的示例代码中我们可以 describe 函数中传入字符串、整型和结构体，最后结果输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">Type</span> <span class="o">=</span> string, <span class="nv">value</span> <span class="o">=</span> Hello World  
+<span class="nv">Type</span> <span class="o">=</span> int, <span class="nv">value</span> <span class="o">=</span> <span class="m">55</span>  
+<span class="nv">Type</span> <span class="o">=</span> struct <span class="o">{</span> name string <span class="o">}</span>, <span class="nv">value</span> <span class="o">=</span> <span class="o">{</span>Naveen R<span class="o">}</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="接口的类型断言">接口的类型断言</h1>
+<p>类型断言用于获取接口的底层值。</p>
+<p>i.(T) 用于获取 i 具体类型为 T 的接口的底层值。</p>
+<p>代码胜万言，下面我就用代码展示类型断言是怎么用的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">assert</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>  
+    <span class="nx">s</span> <span class="o">:=</span> <span class="nx">i</span><span class="p">.(</span><span class="kt">int</span><span class="p">)</span> <span class="c1">//从 i 中获取 int 底层的值
+</span><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="kd">var</span> <span class="nx">s</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">=</span> <span class="mi">56</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>s 的实际类型是 int。我们使用 i.(int) 获取 i 底层的 int 的值</p>
+<p>那么如果上面的代码的实际类型不是 int，会出现什么呢？看下面的代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">assert</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>  
+    <span class="nx">s</span> <span class="o">:=</span> <span class="nx">i</span><span class="p">.(</span><span class="kt">int</span><span class="p">)</span> 
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="kd">var</span> <span class="nx">s</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">=</span> <span class="s">&#34;Steven Paul&#34;</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的代码中，我们传入了一个字符串到 assert 函数中，想要从中获取一个整型的值，这段代码将会出现 panic，并打印如下信息：</p>
+<p>“interface {} is string, not int.”</p>
+<p>那么，现在该怎么办呢？怎么才能避免程序的崩溃呢？</p>
+<p>其实我们可以这样解决：</p>
+<p>因为 i.(T) 会返回一个 error 异常的，只要我们对它进行判断，就可以避免程序崩溃了，</p>
+<p>v, ok := i.(T)</p>
+<p>如果 i 的实际类型是 T, 那么 v 就是i的值，ok 就是 true, 代码正常运行；</p>
+<p>如果 i 的实际类型不是 T 的话，v 就返回空， ok就是 false, 代码也就不会崩溃了。</p>
+<p>所以我们对上面的代码进行简单的修改，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">assert</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>  
+    <span class="nx">v</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">i</span><span class="p">.(</span><span class="kt">int</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nx">ok</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="kd">var</span> <span class="nx">s</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">=</span> <span class="mi">56</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">i</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">=</span> <span class="s">&#34;Steven Paul&#34;</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当 “Steven Paul” 传递给 assert 函数时，ok 将是 false ，因为 i 的具体类型不是 int，因此 v值为 0。所以该程序将输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="m">56</span> <span class="nb">true</span>  
+<span class="m">0</span> <span class="nb">false</span>  
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="类型开关">类型开关</h1>
+<p>类型开关用于将接口的实际类型与多种情况下 case 语句中指定的类型进行比较。</p>
+<p>类似于 switch case。唯一的区别是 case 指定的是类型而不是正常 switch 中的值。</p>
+<p>类型开关的语法类似于类型断言。</p>
+<p>在 i.(T) 类型断言的语法中，类型 T 应替换 type 为类型切换的关键字。</p>
+<p>下面看一下代码中是怎么实现的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>  
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">findType</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>  
+    <span class="k">switch</span> <span class="nx">i</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kt">string</span><span class="p">:</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;I am a string and my value is %s\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">.(</span><span class="kt">string</span><span class="p">))</span>
+    <span class="k">case</span> <span class="kt">int</span><span class="p">:</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;I am an int and my value is %d\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">.(</span><span class="kt">int</span><span class="p">))</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Unknown type\n&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nf">findType</span><span class="p">(</span><span class="s">&#34;Naveen&#34;</span><span class="p">)</span>
+    <span class="nf">findType</span><span class="p">(</span><span class="mi">77</span><span class="p">)</span>
+    <span class="nf">findType</span><span class="p">(</span><span class="mf">89.98</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的代码中， switch i.(type) 指定了一个 a type switch， 每一个 case 语句将 i 的实际类型和指定类型比较。如果任何一个 case 匹配的话, 就打印出相应的语句。</p>
+<p>最后程序输出如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">I am a string and my value is Naveen
+I am an int and my value is <span class="m">77</span>
+Unknown <span class="nb">type</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>89.98 类型 是 float64，不匹配任何情况，因此最后一行打印 Unknown type。</p>
+<p>也可以将类型与接口进行比较。如果我们有一个类型并且该类型实现了一个接口，则可以将此类型与其实现的接口进行比较。</p>
+<p>为了更清楚，让我们编写一个程序详细说明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">type</span> <span class="nx">Describer</span> <span class="kd">interface</span> <span class="p">{</span>  
+    <span class="nf">Describe</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>  
+    <span class="nx">name</span> <span class="kt">string</span>
+    <span class="nx">age</span>  <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="nx">Person</span><span class="p">)</span> <span class="nf">Describe</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s is %d years old&#34;</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">findType</span><span class="p">(</span><span class="nx">i</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>  
+    <span class="k">switch</span> <span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">Describer</span><span class="p">:</span>
+        <span class="nx">v</span><span class="p">.</span><span class="nf">Describe</span><span class="p">()</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;unknown type\n&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>  
+    <span class="nf">findType</span><span class="p">(</span><span class="s">&#34;Naveen&#34;</span><span class="p">)</span>
+    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">Person</span><span class="p">{</span>
+        <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;Naveen R&#34;</span><span class="p">,</span>
+        <span class="nx">age</span><span class="p">:</span>  <span class="mi">25</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="nf">findType</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在上面的程序中，Person 结构体实现了 Describer 接口。 然后我们在 findType 函数中使用 case 语句比较类型 v 和比较 Describer 接口类型。</p>
+<p>而 p 是 Person类型，因此当我们把 p 传到 findType 中时，v 就是 Describer。</p>
+<p>所以最后程序输出如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">unknown <span class="nb">type</span>
+Naveen R is <span class="m">25</span> years old
+</code></pre></td></tr></table>
+</div>
+</div>
     </article>
     
     
@@ -2376,7 +3211,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="toc " data-dir="ltr" data-folding="true" data-ani="true">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#一文读懂">一文读懂</a></li>
+    <li><a href="#声明和实现一个接口">声明和实现一个接口</a></li>
   </ul>
 </nav>
   </div>
