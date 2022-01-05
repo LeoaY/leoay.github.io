@@ -92,8 +92,8 @@ enableSidebarPostsByOrder = false
 showPoweredBy = false
 showFeedLinks = true
 showSocialLinks = true
-enableLangChange = true
-enableThemeChange = true
+enableLangChange = false
+enableThemeChange = false
 
 # service
 googleTagManager = "" # GTM-XXXXXX
