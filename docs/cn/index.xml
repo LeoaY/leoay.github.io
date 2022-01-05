@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>leoay 技术日志</title>
+    <title>leoay技术日志</title>
     <link>https://gitech.leoay.com/cn/</link>
-    <description>Recent content on leoay 技术日志</description>
+    <description>Recent content on leoay技术日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn</language>
     <managingEditor>leoay@leoay.com (leoay)</managingEditor>
