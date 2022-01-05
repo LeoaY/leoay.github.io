@@ -25,9 +25,9 @@ header:
     paddingY: 0
     align: center
     title:
-      - LEOAY 的技术日志
+      - LEOAY的技术日志
     subtitle:
-      - The world’s fastest framework for building websites
+      - 记录一些技术的思考
     titleColor: 
     titleShadow: true
     titleFontSize: 44
@@ -50,7 +50,7 @@ header:
     subtitle:
       -
     titleColor:
-    titleShadow: false
+    titleShadow: true
     titleFontSize: 44
     subtitleColor:
     subtitleCursive: false
