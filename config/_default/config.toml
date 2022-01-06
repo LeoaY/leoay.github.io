@@ -18,8 +18,6 @@ rssLimit = 100
 enableGitInfo = false
 googleAnalytics = ""
 
-publishDir = "docs"
-
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
