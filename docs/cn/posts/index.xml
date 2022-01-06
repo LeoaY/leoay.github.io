@@ -14,11 +14,53 @@
     <managingEditor>leoay@leoay.com (leoay)</managingEditor>
     <webMaster>leoay@leoay.com (leoay)</webMaster>
     <copyright>©2022, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 25 Jan 2020 06:40:51 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 06 Jan 2022 06:40:51 +0900</lastBuildDate>
     
         <atom:link href="https://gitech.leoay.com/cn/posts/index.xml" rel="self" type="application/rss+xml" />
     
 
+      
+      <item>
+        <title>链接收藏</title>
+        <link>https://gitech.leoay.com/cn/posts/%E9%93%BE%E6%8E%A5%E6%94%B6%E8%97%8F/</link>
+        <pubDate>Thu, 06 Jan 2022 06:40:51 +0900</pubDate>
+        <author>leoay@leoay.com (leoay)</author>
+        <atom:modified>Thu, 06 Jan 2022 06:40:51 +0900</atom:modified>
+        <guid>https://gitech.leoay.com/cn/posts/%E9%93%BE%E6%8E%A5%E6%94%B6%E8%97%8F/</guid>
+        <description>https://shanebarker.com/blog/how-to-become-an-influencer/</description>
+        
+        <dc:creator>leoay</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>shortcode</category>
+            
+          
+        
+        
+          
+            
+              <category>素材</category>
+            
+          
+            
+              <category>链接</category>
+            
+          
+            
+              <category>参考链接</category>
+            
+          
+        
+        
+          
+            
+          
+        
+      </item>
       
       <item>
         <title>一文搞懂Go语言中的interface(1)</title>

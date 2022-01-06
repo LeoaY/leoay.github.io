@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>shortcode on leoay技术日志</title>
-    <link>https://gitech.leoay.com/cn/tags/shortcode/</link>
-    <description>Recent content in shortcode on leoay技术日志</description>
+    <title>素材 on leoay技术日志</title>
+    <link>https://gitech.leoay.com/cn/categories/%E7%B4%A0%E6%9D%90/</link>
+    <description>Recent content in 素材 on leoay技术日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn</language>
     <managingEditor>leoay@leoay.com (leoay)</managingEditor>
@@ -16,7 +16,7 @@
     <copyright>©2022, All Rights Reserved</copyright>
     <lastBuildDate>Thu, 06 Jan 2022 06:40:51 +0900</lastBuildDate>
     
-        <atom:link href="https://gitech.leoay.com/cn/tags/shortcode/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://gitech.leoay.com/cn/categories/%E7%B4%A0%E6%9D%90/index.xml" rel="self" type="application/rss+xml" />
     
 
       
@@ -52,44 +52,6 @@
           
             
               <category>参考链接</category>
-            
-          
-        
-        
-          
-            
-          
-        
-      </item>
-      
-      <item>
-        <title>一文搞懂Go语言中的interface(1)</title>
-        <link>https://gitech.leoay.com/cn/posts/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84interface1/</link>
-        <pubDate>Sat, 25 Jan 2020 06:40:51 +0900</pubDate>
-        <author>leoay@leoay.com (leoay)</author>
-        <atom:modified>Sat, 25 Jan 2020 06:40:51 +0900</atom:modified>
-        <guid>https://gitech.leoay.com/cn/posts/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84interface1/</guid>
-        <description>我是 leoay, 一个单纯的技术人， 你好，我是 leoay，又好久不见了，好像上篇文章立的 flag 又被打破了， 如果不知道，那就前往上篇文章看看我立的 flag。 果</description>
-        
-        <dc:creator>leoay</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>shortcode</category>
-            
-          
-        
-        
-          
-            
-              <category>golang</category>
-            
-          
-            
-              <category>interface</category>
             
           
         
